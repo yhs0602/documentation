@@ -31,5 +31,6 @@ COPY . ${HOME}
 USER root
 RUN chown -R ${NB_UID} ${HOME}
 USER ${NB_USER}
+WORKDIR /home/${NB_USER}
 
 ENTRYPOINT ["/opt/conda/bin/conda", "run", "--no-capture-output", "--live-stream"]
