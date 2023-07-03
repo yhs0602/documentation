@@ -15,4 +15,18 @@ RUN apt-get update && apt-get install -y git
 RUN git clone https://github.com/BackpropTools/BackpropTools
 RUN mkdir /include
 RUN ln -s /BackpropTools/include/backprop_tools /usr/local/include/
+RUN conda install -c conda-forge notebook
+
+ARG NB_USER=bpt_user
+ARG NB_UID=1000
+ENV USER ${NB_USER}
+ENV NB_UID ${NB_UID}
+ENV HOME /home/${NB_USER}
+
+RUN adduser --disabled-password \
+    --gecos "Default user" \
+    --uid ${NB_UID} \
+    ${NB_USER}
+USER ${NB_USER}
+
 ENTRYPOINT ["/opt/conda/bin/conda", "run", "--no-capture-output", "--live-stream"]
