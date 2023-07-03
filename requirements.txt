@@ -1,0 +1,5 @@
+nbsphinx
+pandoc
+sphinx
+nbsphinx
+jinja2
