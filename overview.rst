@@ -1,7 +1,17 @@
 .. include:: colors.rst
+.. |run-on-binder| image:: https://mybinder.org/badge_logo.svg
+   :target: https://mybinder.org/v2/gh/BackpropTools/documentation/master?labpath=Containers.ipynb
 
 Overview
 ========
+
+Code: `https://github.com/BackpropTools/BackpropTools <https://github.com/BackpropTools/BackpropTools>`_
+
+Paper: `https://arxiv.org/abs/2306.03530 <https://arxiv.org/abs/2306.03530>`_
+
+Live Demo (browser): `https://backprop.tools <https://backprop.tools>`_
+
+Interactive Tutorial: |run-on-binder|
 
 Introduction
 ------------
