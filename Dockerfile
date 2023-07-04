@@ -7,8 +7,10 @@ RUN apt-get update && apt-get install -y build-essential
 # RUN mamba env create -n bptenv
 # Dependencies for xeus-cling
 # RUN mamba install -n bptenv -y -c conda-forge cmake xeus-zmq cling nlohmann_json cppzmq xtl pugixml doctest cpp-argparse jupyterlab
+# Dependencies for Binder
+# RUN mamba install -n bptenv -y -c conda-forge notebook
 # Dependencies for the documentation
-# RUN mamba install -n bptenv -y -c conda-forge notebook pandoc sphinx nbsphinx jinja2
+# RUN mamba install -n bptenv -y -c conda-forge pandoc sphinx nbsphinx jinja2
 COPY environment.yml .
 RUN ls
 RUN mamba env create -n bptenv -f environment.yml
@@ -21,6 +23,10 @@ ENV CONDA_PREFIX=/opt/conda/envs/bptenv/
 RUN conda run -n bptenv cmake -D CMAKE_INSTALL_PREFIX=${CONDA_PREFIX} -D CMAKE_INSTALL_LIBDIR=${CONDA_PREFIX}/lib ..
 RUN conda run -n bptenv make -j$(nproc) && make install
 WORKDIR /
+
+RUN mamba install -n bptenv -y -c conda-forge sphinx-reredirects
+RUN mamba install -n bptenv -y -c conda-forge furo
+
 
 ARG NB_USER=bpt_user
 ARG NB_UID=1000
