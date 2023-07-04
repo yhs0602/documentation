@@ -8,6 +8,7 @@ BackpropTools Documentation!
 
    overview
    Containers
+   Multiple Dispatch
 
 
 
