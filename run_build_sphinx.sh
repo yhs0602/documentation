@@ -1,4 +1,4 @@
 set -e
 
-./run.sh make clean
-./run.sh make html
+IMAGE=backprop_tools_docs_sphinx ./run.sh make clean
+IMAGE=backprop_tools_docs_sphinx ./run.sh make html
