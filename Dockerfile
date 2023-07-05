@@ -8,17 +8,17 @@ RUN apt-get update && apt-get install -y sudo git
 USER mambauser
 
 # RUN micromamba create -n bptenv
-RUN micromamba install -n base -c conda-forge xeus-cling 
-RUN micromamba install -n base -c conda-forge jupyterlab notebook
+# RUN micromamba install -n base -c conda-forge xeus-cling 
+# RUN micromamba install -n base -c conda-forge jupyterlab notebook
 
 # freezing env:
 # ./run_bash.sh
-# micromamba env export -n bptenv > environment.yml
+# micromamba env export -n base > environment.yml
 # comment out the above
 # comment in the below
 
-# COPY environment.yml .
-# RUN micromamba env create -f environment.yml -n bptenv 
+COPY environment.yml .
+RUN micromamba install -y -f environment.yml -n base
 
 
 # RUN git clone https://github.com/jupyter-xeus/xeus-cling.git
