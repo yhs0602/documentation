@@ -21,6 +21,7 @@ COPY environment.yml .
 RUN micromamba install -y -f environment.yml -n base
 
 
+# Installing from source
 # RUN git clone https://github.com/jupyter-xeus/xeus-cling.git
 # WORKDIR xeus-cling
 # RUN git checkout 0.15.1
@@ -31,11 +32,6 @@ RUN micromamba install -y -f environment.yml -n base
 # RUN conda run -n bptenv make -j$(nproc) && make install
 # WORKDIR /
 
-# ARG NB_USER=bpt_user
-# ARG NB_UID=1000
-# ENV USER ${NB_USER}
-# ENV NB_UID ${NB_UID}
-# ENV HOME /home/${NB_USER}
 
 USER root
 WORKDIR /
@@ -44,22 +40,32 @@ RUN mkdir -p /usr/local/include
 RUN ln -s /BackpropTools/include/backprop_tools /usr/local/include/
 USER mambauser
 
+RUN micromamba install -y -n base -c conda-forge hdf5 numpy datasets h5py Pillow
 
+
+# Testing HDF5 in xeus-cling
 # RUN apt-get update && apt-get install -y libhdf5-dev
-# WORKDIR /BackpropTools
-# RUN git submodule update --init --recursive -- external/highfive
-# RUN mkdir /data
-# WORKDIR /data
-# RUN pip3 install numpy==1.22.4 datasets==2.11.0 h5py==3.7.0 Pillow==9.4.0
-# RUN python3 /BackpropTools/examples/docker/00_basic_mnist/fetch_and_convert_mnist.py
+USER root
+WORKDIR /BackpropTools
+RUN git submodule update --init --recursive -- external/highfive
+RUN mkdir /data
+WORKDIR /data
+USER mambauser
+WORKDIR /home/mambauser
+ARG MAMBA_DOCKERFILE_ACTIVATE=1
+RUN python3 /BackpropTools/examples/docker/00_basic_mnist/fetch_and_convert_mnist.py
 
+# User creation not needed when using micromamba (because it already has a non-root user)
+# ARG NB_USER=bpt_user
+# ARG NB_UID=1000
+# ENV USER ${NB_USER}
+# ENV NB_UID ${NB_UID}
+# ENV HOME /home/${NB_USER}
 # RUN useradd -md ${HOME} -s /bin/bash -c "Default User" -u ${NB_UID} -U ${NB_USER} 
 # RUN echo "${NB_USER} ALL=(ALL) NOPASSWD:ALL" | tee -a /etc/sudoers
 # RUN usermod -aG sudo ${NB_USER}
 # COPY . ${HOME}
-# USER root
 # RUN chown -R ${NB_UID} ${HOME}
-
 # RUN chown -R ${NB_UID} /BackpropTools
 
 # RUN apt-get update && apt-get install -y software-properties-common
