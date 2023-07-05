@@ -4,9 +4,18 @@ ENV DEBIAN_FRONTEND=noninteractive
 
 RUN apt-get update && apt-get install -y sudo git
 
-RUN conda create -n bptenv
-RUN conda install -n bptenv -c conda-forge xeus-cling 
-RUN conda install -n bptenv -c conda-forge jupyterlab notebook
+# RUN conda create -n bptenv
+# RUN conda install -n bptenv -c conda-forge xeus-cling 
+# RUN conda install -n bptenv -c conda-forge jupyterlab notebook
+
+# freezing env:
+# ./run_bash.sh
+# conda env export -n bptenv > environment.yml
+# comment out the above
+# comment in the below
+
+COPY environment.yml .
+RUN conda env create -f environment.yml -n bptenv 
 
 
 # COPY environment.yml .
