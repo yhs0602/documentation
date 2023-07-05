@@ -1,5 +1,5 @@
-# FROM --platform=linux/amd64 continuumio/miniconda3
-FROM --platform=linux/amd64 continuumio/miniconda3:23.3.1-0-alpine
+# FROM --platform=linux/amd64 continuumio/miniconda3:23.3.1-0-alpine
+FROM --platform=linux/amd64 continuumio/miniconda3:23.3.1-0
 ENV DEBIAN_FRONTEND=noninteractive
 
 # RUN apt-get update && apt-get install -y build-essential
@@ -37,8 +37,8 @@ ENV USER ${NB_USER}
 ENV NB_UID ${NB_UID}
 ENV HOME /home/${NB_USER}
 
-# RUN apt-get update && apt-get install -y git
-RUN apk update && apk add git
+RUN apt-get update && apt-get install -y git
+# RUN apk update && apk add git
 WORKDIR /
 RUN git clone https://github.com/BackpropTools/BackpropTools
 # WORKDIR /BackpropTools
@@ -54,8 +54,8 @@ RUN ln -s /BackpropTools/include/backprop_tools /usr/local/include/
 # #     --gecos "Default user" \
 # #     --uid ${NB_UID} \
 # #     ${NB_USER}
-# RUN useradd -md ${HOME} -s /bin/bash -c "Default User" -u ${NB_UID} -U ${NB_USER} 
-RUN addgroup -g ${NB_UID} ${NB_USER} && adduser -h ${HOME} -s /bin/ash -G ${NB_USER} -u ${NB_UID} -D -g "Default User" ${NB_USER}
+RUN useradd -md ${HOME} -s /bin/bash -c "Default User" -u ${NB_UID} -U ${NB_USER} 
+# RUN addgroup -g ${NB_UID} ${NB_USER} && adduser -h ${HOME} -s /bin/ash -G ${NB_USER} -u ${NB_UID} -D -g "Default User" ${NB_USER}
 RUN echo "${NB_USER} ALL=(ALL) NOPASSWD:ALL" | tee -a /etc/sudoers
 # RUN usermod -aG sudo ${NB_USER}
 COPY . ${HOME}
