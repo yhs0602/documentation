@@ -54,6 +54,10 @@ USER mambauser
 WORKDIR /home/mambauser
 ARG MAMBA_DOCKERFILE_ACTIVATE=1
 RUN python3 /BackpropTools/examples/docker/00_basic_mnist/fetch_and_convert_mnist.py
+ENV LD_LIBRARY_PATH=/opt/conda/lib
+ENV C_INCLUDE_PATH=/opt/conda/include
+ENV CPLUS_INCLUDE_PATH="/opt/conda/include:/BackpropTools/external/highfive/include"
+
 
 # User creation not needed when using micromamba (because it already has a non-root user)
 # ARG NB_USER=bpt_user
