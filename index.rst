@@ -9,6 +9,7 @@ BackpropTools Documentation!
    overview
    Containers
    Multiple Dispatch
+   Deep Learning
 
 
 
