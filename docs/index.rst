@@ -10,6 +10,7 @@ BackpropTools Documentation!
    Containers
    Multiple Dispatch
    Deep Learning
+   MNIST Classification
 
 
 
