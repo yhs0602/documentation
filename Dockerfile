@@ -59,6 +59,7 @@ ENV C_INCLUDE_PATH="/usr/local/include:/opt/conda/include:/BackpropTools/externa
 ENV CPLUS_INCLUDE_PATH="/usr/local/include:/opt/conda/include:/BackpropTools/external/highfive/include"
 
 COPY docs/*.ipynb ./
+COPY docs/images/ ./images
 
 # User creation not needed when using micromamba (because it already has a non-root user)
 # ARG NB_USER=bpt_user
