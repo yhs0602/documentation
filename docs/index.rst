@@ -7,10 +7,10 @@ BackpropTools Documentation!
    :caption: Contents:
 
    overview
-   Containers
-   Multiple Dispatch
-   Deep Learning
-   MNIST Classification
+   01-Containers
+   02-Multiple Dispatch
+   03-Deep Learning
+   04-MNIST Classification
 
 
 
