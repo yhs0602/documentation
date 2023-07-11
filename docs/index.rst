@@ -10,7 +10,9 @@ BackpropTools Documentation!
    01-Containers
    02-Multiple Dispatch
    03-Deep Learning
-   04-MNIST Classification
+   04-CPU Acceleration
+   05-MNIST Classification
+   06-Deep Reinforcement Learning
 
 
 
