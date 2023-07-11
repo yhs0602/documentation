@@ -1,10 +1,11 @@
 # This builder downloads and converts the MNIST dataset to HDF5
 FROM --platform=linux/amd64 mambaorg/micromamba:1.4.6-jammy AS builder
-RUN micromamba install -y -n base -c conda-forge numpy datasets h5py Pillow
-RUN micromamba env export -n base > /home/mambauser/environment.yml
 
-# COPY environment_builder.yml .
-# RUN micromamba install -y -f environment_builder.yml -n base
+# RUN micromamba install -y -n base -c conda-forge numpy datasets h5py Pillow
+# RUN micromamba env export -n base > /home/mambauser/environment.yml
+
+COPY environment_builder.yml .
+RUN micromamba install -y -f environment_builder.yml -n base
 
 USER root
 RUN apt-get update && apt-get install -y git
@@ -25,12 +26,13 @@ USER root
 RUN apt-get update && apt-get install -y git
 USER mambauser
 
-RUN micromamba install -y -n base -c conda-forge xeus-cling \
-hdf5 openblas \
-jupyterlab notebook jupyterlab_vim
-USER root
-RUN micromamba env export -n base > /environment.yml
-COPY --from=builder /home/mambauser/environment.yml /environment_builder.yml
+# RUN micromamba install -y -n base -c conda-forge xeus-cling \
+# hdf5 openblas \
+# jupyterlab notebook jupyterlab_vim
+# USER root
+# RUN micromamba env export -n base > /environment.yml
+# USER mambauser
+# COPY --from=builder /home/mambauser/environment.yml /environment_builder.yml
 
 # freezing env:
 # ./run_bash.sh
@@ -38,9 +40,10 @@ COPY --from=builder /home/mambauser/environment.yml /environment_builder.yml
 # comment out the above
 # comment in the below
 
-# COPY environment.yml .
-# RUN micromamba install -y -f environment.yml -n base
+COPY environment.yml .
+RUN micromamba install -y -f environment.yml -n base
 
+USER root
 RUN echo "8ef762e7fea267c2a7a5a1c0b024dc56b3a93eb5" > /backprop_tools_commit # because ARG does not invalidate the build cache
 WORKDIR /
 RUN git clone https://github.com/BackpropTools/BackpropTools
