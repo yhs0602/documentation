@@ -40,8 +40,8 @@ RUN mkdir -p /usr/local/include
 RUN ln -s /BackpropTools/include/backprop_tools /usr/local/include/
 USER mambauser
 
-RUN micromamba install -y -n base -c conda-forge hdf5 numpy datasets h5py Pillow mkl
-RUN micromamba install -y -n base -c conda-forge mkl-include
+RUN micromamba install -y -n base -c conda-forge hdf5 numpy datasets h5py Pillow openblas
+# RUN micromamba install -y -n base -c conda-forge mkl-include
 
 
 # Testing HDF5 in xeus-cling
