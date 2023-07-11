@@ -36,3 +36,33 @@ Over time, |BPT| has grown into a complete library for deep supervised and reinf
    |BPT| includes a fast dynamics simulator for a pendulum (equivalent to Pendulum-v1 from the `gym/gymnasium <https://gymnasium.farama.org/>`_ suite). The pendulum simulator is an example/template for the integration of other dynamics simulators. Future simulators we are planning on implementing include multirotor drones and racing cars. Furthermore we provide a high-performance, low-level `MuJoCo <https://mujoco.org/>`_ interface (about 25% faster than the state of the art `EnvPool <https://github.com/sail-sg/envpool>`_)
 **Reinforcement Learning**
    |BPT| tightly integrates the deep learning and simulation components to provide highly performant reinforcement learning routines. We implement state of the art on- and off-policy RL algorithms in the form of `PPO <https://arxiv.org/abs/1707.06347>`_ and `TD3 <https://arxiv.org/abs/1802.09477>`_ and demonstrate that |BPT| enables faster training than other popular RL libraries in case of the pendulum and the MuJoCo Ant-v4 task (learning to walk a quadruped) (see `paper <https://arxiv.org/abs/2306.03530>`_).
+
+
+.. _About this documentation:
+
+About this documentation
+~~~~~~~~~~~~~~~~~~~~~~~~
+
+This documentation is structured as a series of interactive Jupyter notebooks using the C/C++ interpreter `Cling <https://github.com/root-project/cling>`_. The notebooks can be run on Binder using the links at the top of each one. Note that starting notebooks on Binder is convenient because all that is needed is a browser but they can take a long time or even fail to start. Alternatively you can also easily run this tutorial on you computer using Docker. Given that you have Docker installed and running you can clone this repository at a location of your choice:
+
+.. code:: none
+
+   git clone https://github.com/BackpropTools/documentation.git
+
+.. code:: none
+
+   cd documentation
+
+Then we can build the Docker image. Note that as a pre-caution we are using `--no-cache` to make sure the clone of **BackpropTools** as well as package indices etc. are up to date. If you know what you are doing you can omit this flag to speed up repeated/incremental builds.
+
+.. code:: none
+
+   docker build . -t backprop_tools_docs --no-cache
+
+Finally we can run the image and start a Jupyter server:
+
+.. code:: none
+
+   docker run -it --rm --platform linux/amd64 -p 8888:8888 backprop_tools_docs jupyter lab --ip 0.0.0.0
+
+Open the link that is displayed in the CLI (``http://127.0.0.1:8888/...``) in your browser and enjoy tinkering with the tutorial! 

@@ -3,7 +3,7 @@ ENV DEBIAN_FRONTEND=noninteractive
 
 # RUN apt-get update && apt-get install -y build-essential
 RUN conda create -n bptenv
-RUN conda install -n bptenv -c conda-forge make pandoc sphinx nbsphinx jinja2 sphinx-reredirects furo ipython_genutils
+RUN conda install -n bptenv -c conda-forge make pandoc sphinx nbsphinx jinja2 sphinx-reredirects ipython_genutils furo
 
 ENTRYPOINT ["/opt/conda/bin/conda", "run", "-n", "bptenv", "--no-capture-output", "--live-stream"]
 
