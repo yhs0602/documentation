@@ -7,9 +7,9 @@ USER root
 RUN apt-get update && apt-get install -y sudo git
 USER mambauser
 
-# RUN micromamba create -n bptenv
-# RUN micromamba install -n base -c conda-forge xeus-cling 
-# RUN micromamba install -n base -c conda-forge jupyterlab notebook
+RUN micromamba create -n bptenv
+RUN micromamba install -n base -c conda-forge xeus-cling 
+RUN micromamba install -n base -c conda-forge jupyterlab notebook jupyterlab_vim
 
 # freezing env:
 # ./run_bash.sh
@@ -17,8 +17,8 @@ USER mambauser
 # comment out the above
 # comment in the below
 
-COPY environment.yml .
-RUN micromamba install -y -f environment.yml -n base
+# COPY environment.yml .
+# RUN micromamba install -y -f environment.yml -n base
 
 
 # Installing from source
@@ -40,7 +40,8 @@ RUN mkdir -p /usr/local/include
 RUN ln -s /BackpropTools/include/backprop_tools /usr/local/include/
 USER mambauser
 
-RUN micromamba install -y -n base -c conda-forge hdf5 numpy datasets h5py Pillow
+RUN micromamba install -y -n base -c conda-forge hdf5 numpy datasets h5py Pillow mkl
+RUN micromamba install -y -n base -c conda-forge mkl-include
 
 
 # Testing HDF5 in xeus-cling
