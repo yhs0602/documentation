@@ -1,1 +1,0 @@
-g++ -I/opt/intel/oneapi/mkl/latest/include -L/opt/intel/oneapi/mkl/latest/lib/intel64 -L/opt/intel/oneapi/compiler/latest/linux/compiler/lib/intel64_lin cling_mkl_test_bare.cpp -lmkl_intel_ilp64 -lmkl_intel_thread -lmkl_core -liomp5 -lpthread -lm -ldl
