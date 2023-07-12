@@ -1,6 +1,6 @@
 .. include:: colors.rst
 .. |run-on-binder| image:: https://mybinder.org/badge_logo.svg
-   :target: https://mybinder.org/v2/gh/BackpropTools/documentation/binder?labpath=Containers.ipynb
+   :target: https://mybinder.org/v2/gh/BackpropTools/documentation/binder?labpath=01-Containers.ipynb
 
 Overview
 ========
