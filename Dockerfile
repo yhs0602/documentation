@@ -2,10 +2,10 @@
 FROM --platform=linux/amd64 mambaorg/micromamba:1.4.6-jammy AS builder
 
 # RUN micromamba install -y -n base -c conda-forge numpy datasets h5py Pillow
-# RUN micromamba env export -n base > /home/mambauser/environment.yml
+# RUN micromamba env export -n base > /home/mambauser/environment_builder.yml
 
-COPY environment_builder.yml .
-RUN micromamba install -y -f environment_builder.yml -n base
+COPY environment_builder.yml /home/mambauser/environment_builder.yml
+RUN micromamba install -y -f /home/mambauser/environment_builder.yml -n base
 
 USER root
 RUN apt-get update && apt-get install -y git
@@ -21,18 +21,19 @@ USER mambauser
 
 FROM --platform=linux/amd64 mambaorg/micromamba:1.4.6-jammy
 ENV DEBIAN_FRONTEND=noninteractive
+COPY --from=builder /home/mambauser/environment_builder.yml /environment_builder.yml
 
 USER root
 RUN apt-get update && apt-get install -y git
 USER mambauser
 
 # RUN micromamba install -y -n base -c conda-forge xeus-cling \
+# xcanvas \
 # hdf5 openblas \
 # jupyterlab notebook jupyterlab_vim
 # USER root
 # RUN micromamba env export -n base > /environment.yml
 # USER mambauser
-# COPY --from=builder /home/mambauser/environment.yml /environment_builder.yml
 
 # freezing env:
 # ./run_bash.sh
@@ -40,8 +41,8 @@ USER mambauser
 # comment out the above
 # comment in the below
 
-COPY environment.yml .
-RUN micromamba install -y -f environment.yml -n base
+COPY environment.yml /
+RUN micromamba install -y -f /environment.yml -n base
 
 USER root
 COPY --from=builder /backprop_tools_commit /backprop_tools_commit
