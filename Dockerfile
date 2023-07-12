@@ -9,7 +9,7 @@ RUN micromamba install -y -f /home/mambauser/environment_builder.yml -n base
 
 USER root
 RUN apt-get update && apt-get install -y git
-RUN echo "8ef762e7fea267c2a7a5a1c0b024dc56b3a93eb5" > /backprop_tools_commit # because ARG does not invalidate the build cache
+RUN echo "32152d4b9316c7eec2dcab712b1847cc39301956" > /backprop_tools_commit # because ARG does not invalidate the build cache
 WORKDIR /
 RUN git clone https://github.com/BackpropTools/BackpropTools
 WORKDIR /BackpropTools
