@@ -4,4 +4,4 @@ sphinx
 nbsphinx
 jinja2
 sphinx-reredirects
-furo==2023.05.20
+furo
