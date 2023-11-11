@@ -9,14 +9,14 @@ RUN micromamba install -y -f /home/mambauser/environment_builder.yml -n base
 
 USER root
 RUN apt-get update && apt-get install -y git
-RUN echo "c2202fb73de7a92c12a81a1087047e2df021e1bb" > /backprop_tools_commit # because ARG does not invalidate the build cache
+RUN echo "c2202fb73de7a92c12a81a1087047e2df021e1bb" > /rl_tools_commit # because ARG does not invalidate the build cache
 WORKDIR /
-RUN git clone https://github.com/BackpropTools/BackpropTools
-WORKDIR /BackpropTools
-RUN git checkout $(cat /backprop_tools_commit)
+RUN git clone https://github.com/rl-tools/rl-tools rl_tools
+WORKDIR /rl_tools
+RUN git checkout $(cat /rl_tools_commit)
 ARG MAMBA_DOCKERFILE_ACTIVATE=1
 WORKDIR /
-RUN python3 /BackpropTools/examples/docker/00_basic_mnist/fetch_and_convert_mnist.py
+RUN python3 /rl_tools/examples/docker/00_basic_mnist/fetch_and_convert_mnist.py
 USER mambauser
 
 FROM --platform=linux/amd64 mambaorg/micromamba:1.4.6-jammy
@@ -45,13 +45,13 @@ COPY environment.yml /
 RUN micromamba install -y -f /environment.yml -n base
 
 USER root
-COPY --from=builder /backprop_tools_commit /backprop_tools_commit
+COPY --from=builder /rl_tools_commit /rl_tools_commit
 WORKDIR /
-RUN git clone https://github.com/BackpropTools/BackpropTools
+RUN git clone https://github.com/rl-tools/rl-tools rl_tools
 RUN mkdir -p /usr/local/include
-RUN ln -s /BackpropTools/include/backprop_tools /usr/local/include/
-WORKDIR /BackpropTools
-RUN git checkout $(cat /backprop_tools_commit)
+RUN ln -s /rl_tools/include/rl_tools /usr/local/include/
+WORKDIR /rl_tools
+RUN git checkout $(cat /rl_tools_commit)
 RUN git submodule update --init --recursive -- external/highfive
 COPY --from=builder /mnist.hdf5 /data/mnist.hdf5
 USER mambauser
@@ -63,5 +63,5 @@ COPY docs/images/ ./docs/images
 WORKDIR docs
 
 ENV LD_LIBRARY_PATH=/opt/conda/lib
-ENV C_INCLUDE_PATH="/usr/local/include:/opt/conda/include:/BackpropTools/external/highfive/include"
-ENV CPLUS_INCLUDE_PATH="/usr/local/include:/opt/conda/include:/BackpropTools/external/highfive/include"
+ENV C_INCLUDE_PATH="/usr/local/include:/opt/conda/include:/rl_tools/external/highfive/include"
+ENV CPLUS_INCLUDE_PATH="/usr/local/include:/opt/conda/include:/rl_tools/external/highfive/include"

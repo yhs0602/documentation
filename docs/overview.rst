@@ -1,16 +1,16 @@
 .. include:: colors.rst
 .. |run-on-binder| image:: https://mybinder.org/badge_logo.svg
-   :target: https://mybinder.org/v2/gh/BackpropTools/documentation/binder?labpath=01-Containers.ipynb
+   :target: https://mybinder.org/v2/gh/rl-tools/documentation/binder?labpath=01-Containers.ipynb
 
 ********
 Overview
 ********
 
-Code: `https://github.com/BackpropTools/BackpropTools <https://github.com/BackpropTools/BackpropTools>`_
+Code: `https://github.com/rl-tools/rl-tools <https://github.com/rl-tools/rl-tools>`_
 
 Paper: `https://arxiv.org/abs/2306.03530 <https://arxiv.org/abs/2306.03530>`_
 
-Live Demo (browser): `https://backprop.tools <https://backprop.tools>`_
+Live Demo (browser): `https://rl.tools <https://rl.tools>`_
 
 Interactive Tutorial: |run-on-binder|
 
@@ -19,7 +19,7 @@ Interactive Tutorial: |run-on-binder|
 Introduction
 ############
 
-|BPT| stands for :bpt:`Backprop`\ agation :bpt:`Tools` paying tribute to the `Backpropagation <https://en.wikipedia.org/wiki/Backpropagation>`_ algorithm allowing the efficient calculation of gradients of functions with many inputs (neural network parameters are essentially inputs as well). Hence the Backpropagation algorithm is sitting at the core of the deep learning revolution. **BackpropTools** started out as a library for training and inference for small, fully-connected neural networks that can be tightly integrated with fast simulators running on GPUs to facilitate fast Reinforcement Learning (RL).
+|BPT| stands for :rlt:`Backprop`\ agation :rlt:`Tools` paying tribute to the `Backpropagation <https://en.wikipedia.org/wiki/Backpropagation>`_ algorithm allowing the efficient calculation of gradients of functions with many inputs (neural network parameters are essentially inputs as well). Hence the Backpropagation algorithm is sitting at the core of the deep learning revolution. **RLtools** started out as a library for training and inference for small, fully-connected neural networks that can be tightly integrated with fast simulators running on GPUs to facilitate fast Reinforcement Learning (RL).
 
 GPUs are based on massively parallel architectures consisting of thousands of small processing units which are usually Turing complete  but relatively limited in their general computing capabilities (e.g. usually slow for code that is branching a lot). In the future, deep learning accelerators might not even be Turing complete anymore because they become more specialized for deep learning workloads. For simulations of e.g. fluid or robot dynamics, turing completeness is essential though. Hence, |BPT| is designed to be tightly integrated with simulators on GPUs to run in a `SIMD <https://en.wikipedia.org/wiki/Single_instruction,_multiple_data>`_ fashion. GPU kernels are written in C/C++ and compiled through e.g. Nvidia CUDA with very limited support for existing libraries (not even the `C++ Standard Library <https://en.wikipedia.org/wiki/C%2B%2B_Standard_Library>`_ is fully supported), hence |BPT| is designed to be a dependency-free, header-only, pure C++ library.
 
@@ -58,22 +58,22 @@ This documentation is structured as a series of interactive Jupyter notebooks us
 
 .. code:: none
 
-   git clone https://github.com/BackpropTools/documentation.git
+   git clone https://github.com/rl-tools/documentation.git
 
 .. code:: none
 
    cd documentation
 
-Then we can build the Docker image. Note that as a pre-caution we are using `--no-cache` to make sure the clone of **BackpropTools** as well as package indices etc. are up to date. If you know what you are doing you can omit this flag to speed up repeated/incremental builds.
+Then we can build the Docker image. Note that as a pre-caution we are using `--no-cache` to make sure the clone of **RLtools** as well as package indices etc. are up to date. If you know what you are doing you can omit this flag to speed up repeated/incremental builds.
 
 .. code:: none
 
-   docker build . -t backprop_tools_docs --no-cache
+   docker build . -t rl_tools_docs --no-cache
 
 Finally we can run the image and start a Jupyter server:
 
 .. code:: none
 
-   docker run -it --rm --platform linux/amd64 -p 8888:8888 backprop_tools_docs jupyter lab --ip 0.0.0.0
+   docker run -it --rm --platform linux/amd64 -p 8888:8888 rl_tools_docs jupyter lab --ip 0.0.0.0
 
 Open the link that is displayed in the CLI (``http://127.0.0.1:8888/...``) in your browser and enjoy tinkering with the tutorial! 

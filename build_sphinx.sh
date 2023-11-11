@@ -1,1 +1,1 @@
-docker build . -t backprop_tools_docs_sphinx -f Dockerfile_sphinx $@
+docker build . -t rl_tools_docs_sphinx -f Dockerfile_sphinx $@

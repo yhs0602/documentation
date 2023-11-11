@@ -1,5 +1,5 @@
 docker run -it --rm --platform linux/amd64 -p 8888\:8888 \
--v $(pwd)/../include/backprop_tools/\:/usr/local/include/backprop_tools/\:ro \
+-v $(pwd)/../include/rl_tools/\:/usr/local/include/rl_tools/\:ro \
 -v $(pwd):/workspace/\:rw -w /workspace \
-backprop_tools_docs \
+rl_tools_docs \
 "$@"

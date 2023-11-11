@@ -6,7 +6,7 @@
 # -- Project information -----------------------------------------------------
 # https://www.sphinx-doc.org/en/master/usage/configuration.html#project-information
 
-project = 'BackpropTools'
+project = 'RLtools'
 copyright = '2023'
 author = 'Jonas Eschmann'
 
@@ -31,7 +31,7 @@ redirects = {
 
 html_theme = 'furo'
 html_static_path = ['_static']
-html_title = 'BackpropTools Documentation'
+html_title = 'RLtools Documentation'
 html_logo = 'images/banner.svg'
 html_css_files = [
     'overrides.css',

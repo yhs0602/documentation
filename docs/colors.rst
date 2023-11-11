@@ -1,2 +1,2 @@
-.. role:: bpt
-.. |BPT| replace:: :bpt:`BackpropTools`
+.. role:: rlt
+.. |BPT| replace:: :rlt:`RLtools`

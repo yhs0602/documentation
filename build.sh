@@ -1,1 +1,1 @@
-docker build . -t backprop_tools_docs $@
+docker build . -t rl_tools_docs $@
