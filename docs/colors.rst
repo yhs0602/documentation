@@ -1,2 +1,2 @@
 .. role:: rlt
-.. |BPT| replace:: :rlt:`RLtools`
+.. |RLT| replace:: :rlt:`RLtools`
