@@ -1,6 +1,9 @@
 FROM --platform=linux/amd64 mambaorg/micromamba:1.4.6-jammy
 ENV DEBIAN_FRONTEND=noninteractive
 
+USER root
+RUN apt-get update && apt-get install -y texlive-full
+USER mambauser
 
 RUN micromamba install -n base -c conda-forge make pandoc sphinx nbsphinx jinja2 sphinx-reredirects ipython_genutils furo
 RUN micromamba env export -n base > /home/mambauser/environment_sphinx.yml
@@ -8,6 +11,4 @@ RUN micromamba env export -n base > /home/mambauser/environment_sphinx.yml
 # COPY environment_sphinx.yml /home/mambauser/environment_sphinx.yml
 # RUN micromamba install -y -f /home/mambauser/environment_sphinx.yml -n base
 
-USER root
-RUN apt-get update && apt-get install -y texlive-full
 
