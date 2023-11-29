@@ -58,26 +58,10 @@ Deployment
 About this documentation
 ########################
 
-This documentation is structured as a series of interactive Jupyter notebooks using the C/C++ interpreter `Cling <https://github.com/root-project/cling>`_. The notebooks can be run on Binder using the links at the top of each one. Note that starting notebooks on Binder is convenient because all that is needed is a browser but they can take a long time or even fail to start. Alternatively you can also easily run this tutorial on you computer using Docker. Given that you have Docker installed and running you can clone this repository at a location of your choice:
+This documentation is structured as a series of interactive Jupyter notebooks using the C/C++ interpreter `Cling <https://github.com/root-project/cling>`_. The notebooks can be run on Binder using the links at the top of each one. Note that starting notebooks on Binder is convenient because all that is needed is a browser but they can take a long time or even fail to start. Alternatively you can also easily run this tutorial on you computer using Docker. Given that you have `Docker installed <https://docs.docker.com/engine/install/>`_ and running you can run our pre-built container by:
 
 .. code:: none
 
-   git clone https://github.com/rl-tools/documentation.git
-
-.. code:: none
-
-   cd documentation
-
-Then we can build the Docker image. Note that as a pre-caution we are using `--no-cache` to make sure the clone of **RLtools** as well as package indices etc. are up to date. If you know what you are doing you can omit this flag to speed up repeated/incremental builds.
-
-.. code:: none
-
-   docker build . -t rl_tools_docs --no-cache
-
-Finally we can run the image and start a Jupyter server:
-
-.. code:: none
-
-   docker run -it --rm --platform linux/amd64 -p 8888:8888 rl_tools_docs jupyter lab --ip 0.0.0.0
+   docker run -p 8888:8888 rltools/documentation 
 
 Open the link that is displayed in the CLI (``http://127.0.0.1:8888/...``) in your browser and enjoy tinkering with the tutorial! 
