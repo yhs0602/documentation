@@ -47,7 +47,7 @@ RUN micromamba install -y -f /environment.yml -n base
 USER root
 COPY --from=builder /rl_tools_commit /rl_tools_commit
 WORKDIR /
-RUN git clone https://github.com/rl-tools/rl-tools rl_tools
+RUN git clone https://github.com/rl-tools/rl-tools rl_tools && echo bump_1
 RUN mkdir -p /usr/local/include
 RUN ln -s /rl_tools/include/rl_tools /usr/local/include/
 WORKDIR /rl_tools
@@ -65,3 +65,5 @@ WORKDIR docs
 ENV LD_LIBRARY_PATH=/opt/conda/lib
 ENV C_INCLUDE_PATH="/usr/local/include:/opt/conda/include:/rl_tools/external/highfive/include"
 ENV CPLUS_INCLUDE_PATH="/usr/local/include:/opt/conda/include:/rl_tools/external/highfive/include"
+
+CMD ["bash", "-c", "jupyter lab --ip 0.0.0.0"]
