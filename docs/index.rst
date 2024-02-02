@@ -13,6 +13,8 @@ RLtools Documentation!
    04-CPU Acceleration
    05-MNIST Classification
    06-Deep Reinforcement Learning
+   07-Training Loop
+   08-Custom Environment
 
 
 
