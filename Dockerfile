@@ -9,7 +9,7 @@ RUN micromamba install -y -f /home/mambauser/environment_builder.yml -n base
 
 USER root
 RUN apt-get update && apt-get install -y git
-RUN echo "799e60e20217dd730caa535ad28287a6747870ae" > /rl_tools_commit # because ARG does not invalidate the build cache
+RUN echo "129f6ce7e233ca8613f4e36e4700b34923ff8a21" > /rl_tools_commit # because ARG does not invalidate the build cache
 WORKDIR /
 RUN git clone https://github.com/rl-tools/rl-tools rl_tools
 WORKDIR /rl_tools
@@ -47,7 +47,7 @@ RUN micromamba install -y -f /environment.yml -n base
 USER root
 COPY --from=builder /rl_tools_commit /rl_tools_commit
 WORKDIR /
-RUN git clone https://github.com/rl-tools/rl-tools rl_tools && echo bump_1
+RUN git clone https://github.com/rl-tools/rl-tools rl_tools && echo bump_3
 RUN mkdir -p /usr/local/include
 RUN ln -s /rl_tools/include/rl_tools /usr/local/include/
 WORKDIR /rl_tools
