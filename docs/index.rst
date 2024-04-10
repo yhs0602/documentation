@@ -15,6 +15,7 @@ RLtools Documentation!
    06-Deep Reinforcement Learning
    07-The Loop Interface
    08-Custom Environment
+   09-TinyRL
 
 
 
