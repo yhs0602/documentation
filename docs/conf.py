@@ -52,3 +52,9 @@ html_theme_options = {
         "sidebar_hide_name": True,
     },
 }
+
+from sphinx.highlighting import lexers
+from pygments.lexers.python import PythonLexer
+
+lexers['ipython3'] = PythonLexer()
+
