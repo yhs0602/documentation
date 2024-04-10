@@ -30,7 +30,8 @@ USER mambauser
 # RUN micromamba install -y -n base -c conda-forge xeus-cling \
 # xcanvas \
 # hdf5 openblas \
-# jupyterlab notebook jupyterlab_vim
+# jupyterlab notebook jupyterlab_vim \
+# gxx
 # USER root
 # RUN micromamba env export -n base > /environment.yml
 # USER mambauser
@@ -62,8 +63,10 @@ COPY docs/*.ipynb ./docs/
 COPY docs/images/ ./docs/images
 WORKDIR docs
 
-ENV LD_LIBRARY_PATH=/opt/conda/lib
+# ENV PATH=/opt/conda/bin:$PATH
+ENV LD_LIBRARY_PATH=/opt/conda/lib:$LD_LIBRARY_PATH
 ENV C_INCLUDE_PATH="/usr/local/include:/opt/conda/include:/rl_tools/external/highfive/include"
 ENV CPLUS_INCLUDE_PATH="/usr/local/include:/opt/conda/include:/rl_tools/external/highfive/include"
+ENV TINYRL_COMPILER=g++
 
 CMD ["bash", "-c", "jupyter lab --ip 0.0.0.0"]
