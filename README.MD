@@ -10,3 +10,9 @@ To update the documentation container replace the commit hash in the Dockerfile.
 ## Sphinx doc
 Sphinx uses rst files to create a standard documentation format that can also include jupyter notebooks. Use `./build_sphinx.sh` to build the image and `./run_build_sphinx.sh` to run the container.
 
+
+## Deploy
+
+```
+cp -r _build/html/* static/
+```
