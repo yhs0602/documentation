@@ -2,6 +2,9 @@
 .. |run-on-binder| image:: https://mybinder.org/badge_logo.svg
    :target: https://mybinder.org/v2/gh/rl-tools/documentation/binder?labpath=01-Containers.ipynb
 
+.. |run-on-colab| image:: https://colab.research.google.com/assets/colab-badge.svg
+   :target: https://colab.research.google.com/github/rl-tools/documentation/blob/master/docs/09-TinyRL.ipynb
+
 ********
 Overview
 ********
@@ -12,7 +15,7 @@ Paper: `https://arxiv.org/abs/2306.03530 <https://arxiv.org/abs/2306.03530>`_
 
 Live Demo (browser): `https://rl.tools <https://rl.tools>`_
 
-Interactive Tutorial: |run-on-binder|
+Interactive Tutorial: |run-on-binder| |run-on-colab|
 
 .. _Introduction:
 
