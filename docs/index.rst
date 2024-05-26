@@ -16,7 +16,7 @@ RLtools Documentation!
    07-The Loop Interface
    08-Custom Environment
    09-TinyRL
-   10-Experiment Tracking
+   Experiment Tracking <10-Experiment Tracking>
 
 
 

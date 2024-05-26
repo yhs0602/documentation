@@ -1,4 +1,4 @@
-Experiment Tracking
+Experiment Tracking Interface Specification
 ===================================================
 
 The experiments follow the hierarchical, filesystem-based experiment tracking interface as specified in the following.
