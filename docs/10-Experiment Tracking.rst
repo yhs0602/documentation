@@ -1,7 +1,8 @@
 Experiment Tracking Interface Specification
 ===================================================
 
-The experiments follow the hierarchical, filesystem-based experiment tracking interface as specified in the following.
+The experiments follow the hierarchical, filesystem-based experiment tracking interface. We follow the `UNIX` philosophy and expose it through the filesystem.
+This makes it very easy to sort, filter and analyze the experiments with just unix tools like ``find``, ``sort``, ``grep`` and ``jq``. Additionally it also allows easy monitoring through a static website like https://zoo.rl.tools where experiment results are automatically made accessible by our continuous integration.
 
 Run Identifier
 ---------------
@@ -18,8 +19,6 @@ e.g.
 .. code-block:: none
 
     2024-05-26_06-26-52/4f717cb_zoo_algorithm_environment/sac_pendulum-v1/0000
-
-This makes it very easy to sort, filter and analyze the experiments with just unix tools like ``find``, ``sort``, ``grep`` and ``jq``.
 
 - **{TIME}**: e.g. ``2024-05-26_06-26-52``
 
