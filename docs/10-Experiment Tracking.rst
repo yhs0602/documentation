@@ -1,6 +1,12 @@
 Experiment Tracking Interface Specification
 ===================================================
 
+.. epigraph::
+
+   "Strava but for training runs."
+
+   -- An RLtools contributer
+
 The experiments follow the hierarchical, filesystem-based experiment tracking interface. We follow the `UNIX` philosophy and expose it through the filesystem.
 This makes it very easy to sort, filter and analyze the experiments with just unix tools like ``find``, ``sort``, ``grep`` and ``jq``. Additionally it also allows easy monitoring through a static website like https://zoo.rl.tools where experiment results are automatically made accessible by our continuous integration.
 
