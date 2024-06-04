@@ -15,7 +15,7 @@ RLtools Documentation!
    06-Deep Reinforcement Learning
    07-The Loop Interface
    08-Custom Environment
-   09-TinyRL
+   09-Python Interface
    Experiment Tracking <10-Experiment Tracking>
 
 
