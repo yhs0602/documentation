@@ -3,7 +3,7 @@
    :target: https://mybinder.org/v2/gh/rl-tools/documentation/binder?labpath=01-Containers.ipynb
 
 .. |run-on-colab| image:: https://colab.research.google.com/assets/colab-badge.svg
-   :target: https://colab.research.google.com/github/rl-tools/documentation/blob/master/docs/09-TinyRL.ipynb
+   :target: https://colab.research.google.com/github/rl-tools/documentation/blob/master/docs/09-Python%20Interface.ipynb
 
 ********
 Overview
