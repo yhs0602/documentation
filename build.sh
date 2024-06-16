@@ -1,1 +1,1 @@
-docker build . -t rltools/documentation:v1.1.0 $@
+docker build . -t rltools/documentation:1.1.0 $@
