@@ -13,9 +13,11 @@ Code: `https://github.com/rl-tools/rl-tools <https://github.com/rl-tools/rl-tool
 
 Paper: `https://arxiv.org/abs/2306.03530 <https://arxiv.org/abs/2306.03530>`_
 
-Live Demo (browser): `https://rl.tools <https://rl.tools>`_
+Live Demo (Browser): `https://rl.tools <https://rl.tools>`_
 
 Interactive Tutorial: |run-on-binder| |run-on-colab|
+
+Documentation for Release Versions: `https://rltools.readthedocs.org <https://rltools.readthedocs.org>`_ (`https://docs.rl.tools <https://docs.rl.tools>`_ tracks ``master``)
 
 .. _Introduction:
 
