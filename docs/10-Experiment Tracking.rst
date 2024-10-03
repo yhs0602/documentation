@@ -65,7 +65,7 @@ Each run can contain different files that apply to the whole run, e.g.:
 - **ui.js**/**ui.esm.js** (`optional`): Render function for the UI (see https://studio.rl.tools for more info). This allows collected trajectories to be rendered
 
 Per Step
-~~~~~~~
+~~~~~~~~~
 
 Additionally each run can store files at different stages of the run (corresponding to "steps" of the `Loop Interface <https://docs.rl.tools/07-The%20Loop%20Interface.html>`_) e.g.:
 

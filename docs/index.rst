@@ -7,6 +7,7 @@ RLtools Documentation!
    :caption: Contents:
 
    overview
+   getting_started
    01-Containers
    02-Multiple Dispatch
    03-Deep Learning
