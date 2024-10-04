@@ -63,7 +63,7 @@ For more information please refer to the :doc:`Python Interface <09-Python Inter
 Native: In-Source
 ------------------
 
-This guide gets you started on multiple platforms.
+This guide gets you started using |RLT| natively on multiple platforms (Docker / Ubuntu / WSL / macOS).
 
 - **Step 1**: :ref:`Clone the Repository <clone-repository>`
 - **Step 2**: :ref:`Run Container (Docker only) <run-docker-container>`
@@ -72,7 +72,9 @@ This guide gets you started on multiple platforms.
     - :ref:`macOS <install-dependencies-macos>`
 - **Step 4**: :ref:`Configure and Build the Targets (all platforms) <configure-and-build>`
 - **Step 5**: :ref:`Run an Experiment <run-experiment>`
-- **Step 6**: :ref:`Visualize the Results <visualize>`
+- **Step 6**: Visualize the Results
+    - :ref:`Docker<visualize-docker>`
+    - :ref:`Ubuntu & WSL & macOS <visualize-ubuntu-wsl-macos>`
 
 .. _clone-repository:
 
@@ -182,7 +184,15 @@ You can use ``cmake --build . --target help`` to list the available targets.
 Step 6: Visualize the Results
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-During the experiment the training loop emits checkpoints and recorded trajectories a s well as Javscript rendering instructions in the experiment folder following the :doc:`Experiment Tracking <10-Experiment Tracking>` conventions. You can browse the ``experiments`` folder which contains the runs to inspect the checkpoints and other data. |RLT| includes a simple web-based UI to visualize these results. To expose the experiment data through the forwarded port of the docker container we copy the files that constitute the web interface into the docker container such that a simple, static HTTP server can expose them together with the experiment data.
+During the experiment the training loop emits checkpoints and recorded trajectories a s well as Javscript rendering instructions in the experiment folder following the :doc:`Experiment Tracking <10-Experiment Tracking>` conventions. You can browse the ``experiments`` folder which contains the runs to inspect the checkpoints and other data. |RLT| includes a simple web-based UI to visualize these results.
+
+
+.. _visualize-docker:
+
+Docker
+^^^^^^^^^^^^^^^^^^^^^^
+
+To expose the experiment data through the forwarded port of the docker container we copy the files that constitute the web interface into the docker container such that a simple, static HTTP server can expose them together with the experiment data.
 
 .. code-block:: bash
 
@@ -191,9 +201,22 @@ During the experiment the training loop emits checkpoints and recorded trajector
 
 After copying the UI files we run ``serve.sh`` which periodically builds an index file containing a list of all experiment files such that the web UI can find them. It also starts a simple Python-based HTTP server on port ``8000``. Now you should be able to navigate to `http://localhost:8000 <http://localhost:8000>`_ and view the visualizations of the training runs.
 
+.. _visualize-ubuntu-wsl-macos:
+
+Ubuntu & WSL & macOS
+^^^^^^^^^^^^^^^^^^^^^^
+
+Make sure that the target is run with the cloned repository `rl-tools` as the working directory. This should create an `experiments` folder inside it.
+
+Now we can run ``serve.sh`` which periodically builds an index file containing a list of all experiment files such that the web UI can find them. It also starts a simple Python-based HTTP server on port ``8000``. Now you should be able to navigate to `http://localhost:8000 <http://localhost:8000>`_ and view the visualizations of the training runs.
+
+.. code-block:: bash
+
+   ./serve.sh
+
 .. _native-library:
 
 Native: As a Submodule/Library
 --------------------------------
 
-hello
+To use |RLT| as a library you can start from the example `https://github.com/rl-tools/example <https://github.com/rl-tools/example>`_ and use it as a template to implement your own environment. The steps to setup the environment are the same as in :ref:`Native: In-Source <native>`.
