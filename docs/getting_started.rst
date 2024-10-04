@@ -11,17 +11,22 @@ There are three main ways to use |RLT|:
 :ref:`Python Interface <python-interface>`              - Easy installation: `pip install rltools`                                     - Performance limited by Python environments
                                                         - Compatible with *Gym/Gymnasium* environments                                 - Limited flexibility (fixed algorithms, adjustable hyperparameters)
                                                         - Easiest way to use Intel MKL for acceleration: `pip install rltools[mkl]`
-:ref:`Native: In-Source <native>`                       - Full performance
-                                                        - Simple setup to reproduce the examples                                       - Versioning issues (this is basically forking |RLT|)
+:ref:`Native: In-Source <native>`                       - Full performance                                                             - Versioning issues (this is basically forking |RLT|)
+                                                        - Simple setup to reproduce the examples
                                                         - Maintained tuned training configurations in the |RLT| Zoo
+:ref:`Native: No CMake <native-no-cmake>`               - Full performance
+                                                        - Great for purists who hate CMake and build-systems in general                - No automatic interoperability with IDEs for e.g. debugging
+                                                        - Shows that |RLT| is actually dependency-free
 :ref:`Native: As a Submodule/Library <native-library>`  - Full performance                                                             - No preconfigured targets like in the |RLT| Zoo
                                                         - Easy versioning by including |RLT| as a submodule
                                                         - Great for implementing your own environments and maintaining them over time
 ====================================================== =============================================================================== =====================
 
-Between the two native options we recommend to start with the In-Source approach to take advantage of the pre-configured examples in the |RLT| Zoo. Then, when implementing your own environment you probably want to switch to using |RLT| as a library by including it as a submodule in your project.
+The No CMake approach is mainly for demonstration purposes to show that |RLT| has no dependencies and to show that there is no hidden magic in the CMake configuration.
 
-This quick-start guide mainly focuses on the In-Source appraoch because it showcases how |RLT| can be set up with minimal dependencies and used to reproduce the |RLT| Zoo training runs.
+Between the latter two native options we recommend to start with the In-Source approach to take advantage of the pre-configured examples in the |RLT| Zoo. Then, when implementing your own environment you probably want to switch to using |RLT| as a library by including it as a submodule in your project.
+
+This quick-start guide mainly focuses on the In-Source approach because it showcases how |RLT| can be set up with minimal dependencies and used to reproduce the |RLT| Zoo training runs.
 
 .. _python-interface:
 
@@ -116,7 +121,7 @@ Docker & Ubuntu & WSL
 .. code-block:: bash
 
     apt update
-    DEBIAN_FRONTEND=noninteractive
+    export DEBIAN_FRONTEND=noninteractive
     apt install -y build-essential cmake libopenblas-dev python3
 
 - ``DEBIAN_FRONTEND=noninteractive``: Suppresses interactive prompts during package installation (for convenience)
@@ -213,6 +218,63 @@ Now we can run ``serve.sh`` which periodically builds an index file containing a
 .. code-block:: bash
 
    ./serve.sh
+
+.. _native-no-cmake:
+
+Native: No CMake
+------------------
+
+.. epigraph::
+
+   "Never underestimate the power of a man armed with nothing but a C++ compiler."
+
+   -- RLtools contributor
+
+The following compiles the |RLT| Zoo example for SAC with the Learning to Fly environment:
+
+.. code-block:: bash
+
+    g++ -Iinclude -std=c++17 src/rl/zoo/zoo*.cpp -DRL_TOOLS_RL_ZOO_ALGORITHM_SAC -DRL_TOOLS_RL_ZOO_ENVIRONMENT_L2F
+    ./a.out
+
+- ``-Iinclude``: This is run from the root of the cloned repository folder ``rl-tools`` hence the header search path is ``include``. In Docker this should be adjusted to ``-I/rl_tools/include``.
+- ``-std=c++17``: Use the C++17 standard
+- ``src/rl/zoo/zoo*.cpp``: Compile the |RLT| Zoo files. In Docker this should be adjusted to ``/rl_tools/src/rl/zoo/zoo*.cpp``.
+- ``-DRL_TOOLS_RL_ZOO_ALGORITHM_SAC``: Flag for the |RLT| Zoo that selects the SAC RL algorithm
+- ``-DRL_TOOLS_RL_ZOO_ENVIRONMENT_L2F``: Flag for the |RLT| Zoo that selects the Learning to Fly environment
+- ``./a.out``: Run the compiled binary
+
+This will be quite slow because no optimizations are applied by default. In the following we instruct the compiler to maximally optimize the code using the compile-time knowledge that |RLT| provides. In particular the sizes of all datastructures and for-loops are known at compile-time and the compiler can unroll loops and inline functions to maximize performance.
+
+.. code-block:: bash
+
+    g++ -Iinclude -std=c++17 -Ofast -march=native src/rl/zoo/zoo*.cpp -DRL_TOOLS_RL_ZOO_ALGORITHM_SAC -DRL_TOOLS_RL_ZOO_ENVIRONMENT_L2F
+    ./a.out
+
+
+With this we observe an ~80x speedup. The added options are:
+
+- ``-Ofast``: Maximally optimize the code and use fast math
+- ``-march=native``: Take maximal advantage of the available instructions on the host machine
+
+To further speed up the computations we can use a matrix multiplication backend which we find to give another ~7-10x speedup:
+
+Docker & Ubuntu & WSL
+~~~~~~~~~~~~~
+
+.. code-block:: bash
+
+    g++ -Iinclude -std=c++17 -Ofast -march=native src/rl/zoo/zoo*.cpp -lblas -DRL_TOOLS_BACKEND_ENABLE_OPENBLAS -DRL_TOOLS_RL_ZOO_ALGORITHM_SAC -DRL_TOOLS_RL_ZOO_ENVIRONMENT_L2F
+    ./a.out
+
+
+macOS
+~~~~~~~~~~~~~
+
+.. code-block:: bash
+
+    g++ -Iinclude -std=c++17 -Ofast -march=native src/rl/zoo/zoo*.cpp -framework Accelerate -DRL_TOOLS_BACKEND_ENABLE_ACCELERATE -DRL_TOOLS_RL_ZOO_ALGORITHM_SAC -DRL_TOOLS_RL_ZOO_ENVIRONMENT_L2F
+    ./a.out
 
 .. _native-library:
 
