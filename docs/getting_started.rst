@@ -12,8 +12,8 @@ There are three main ways to use |RLT|:
                                                         - Compatible with *Gym/Gymnasium* environments                                 - Limited flexibility (fixed algorithms, adjustable hyperparameters)
                                                         - Easiest way to use Intel MKL for acceleration: `pip install rltools[mkl]`
 :ref:`Native: In-Source <native>`                       - Full performance                                                             - Versioning issues (this is basically forking |RLT|)
-                                                        - Simple setup to reproduce the examples
-                                                        - Maintained tuned training configurations in the |RLT| Zoo
+                                                        - Easily reproduces the examples
+                                                        - Tuned training configurations maintained in the |RLT| Zoo
 :ref:`Native: No CMake <native-no-cmake>`               - Full performance
                                                         - Great for purists who hate CMake and build-systems in general                - No automatic interoperability with IDEs for e.g. debugging
                                                         - Shows that |RLT| is actually dependency-free
@@ -267,6 +267,9 @@ Docker & Ubuntu & WSL
     g++ -Iinclude -std=c++17 -Ofast -march=native src/rl/zoo/zoo*.cpp -lblas -DRL_TOOLS_BACKEND_ENABLE_OPENBLAS -DRL_TOOLS_RL_ZOO_ALGORITHM_SAC -DRL_TOOLS_RL_ZOO_ENVIRONMENT_L2F
     ./a.out
 
+- ``-lblas``: Link against the BLAS library
+- ``-DRL_TOOLS_BACKEND_ENABLE_OPENBLAS``: Enable the OpenBLAS backend (should actually work with any CBLAS-compatible library)
+
 
 macOS
 ~~~~~~~~~~~~~
@@ -275,6 +278,9 @@ macOS
 
     g++ -Iinclude -std=c++17 -Ofast -march=native src/rl/zoo/zoo*.cpp -framework Accelerate -DRL_TOOLS_BACKEND_ENABLE_ACCELERATE -DRL_TOOLS_RL_ZOO_ALGORITHM_SAC -DRL_TOOLS_RL_ZOO_ENVIRONMENT_L2F
     ./a.out
+
+- ``-framework Accelerate``: Link against the Accelerate framework
+- ``-DRL_TOOLS_BACKEND_ENABLE_ACCELERATE``: Enable the Accelerate backend
 
 .. _native-library:
 
