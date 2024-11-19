@@ -1,1 +1,2 @@
-docker build . -t rltools/documentation:1.1.0 $@
+docker build . -t rltools/documentation:2.0.0 $@
+docker tag rltools/documentation:2.0.0 rltools/documentation:latest
