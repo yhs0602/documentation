@@ -44,7 +44,7 @@ Python Interface
 
     from rltools import SAC
     import gymnasium as gym
-    from gymnasium.experimental.wrappers import RescaleActionV0
+    from gymnasium.wrappers import RescaleAction
 
     seed = 0xf00d
     def env_factory():
@@ -234,7 +234,7 @@ The following compiles the |RLT| Zoo example for SAC with the Learning to Fly en
 
 .. code-block:: bash
 
-    g++ -Iinclude -std=c++17 src/rl/zoo/zoo*.cpp -DRL_TOOLS_RL_ZOO_ALGORITHM_SAC -DRL_TOOLS_RL_ZOO_ENVIRONMENT_L2F
+    g++ -Iinclude -std=c++17 src/rl/zoo/l2f/sac.cpp
     ./a.out
 
 - ``-Iinclude``: This is run from the root of the cloned repository folder ``rl-tools`` hence the header search path is ``include``. In Docker this should be adjusted to ``-I/rl_tools/include``.
@@ -248,7 +248,7 @@ This will be quite slow because no optimizations are applied by default. In the 
 
 .. code-block:: bash
 
-    g++ -Iinclude -std=c++17 -Ofast -march=native src/rl/zoo/zoo*.cpp -DRL_TOOLS_RL_ZOO_ALGORITHM_SAC -DRL_TOOLS_RL_ZOO_ENVIRONMENT_L2F
+    g++ -Iinclude -std=c++17 -Ofast -march=native src/rl/zoo/l2f/sac.cpp
     ./a.out
 
 
@@ -264,7 +264,7 @@ Docker & Ubuntu & WSL
 
 .. code-block:: bash
 
-    g++ -Iinclude -std=c++17 -Ofast -march=native src/rl/zoo/zoo*.cpp -lblas -DRL_TOOLS_BACKEND_ENABLE_OPENBLAS -DRL_TOOLS_RL_ZOO_ALGORITHM_SAC -DRL_TOOLS_RL_ZOO_ENVIRONMENT_L2F
+    g++ -Iinclude -std=c++17 -Ofast -march=native src/rl/zoo/l2f/sac.cpp -lblas -DRL_TOOLS_BACKEND_ENABLE_OPENBLAS
     ./a.out
 
 - ``-lblas``: Link against the BLAS library
@@ -276,7 +276,7 @@ macOS
 
 .. code-block:: bash
 
-    g++ -Iinclude -std=c++17 -Ofast -march=native src/rl/zoo/zoo*.cpp -framework Accelerate -DRL_TOOLS_BACKEND_ENABLE_ACCELERATE -DRL_TOOLS_RL_ZOO_ALGORITHM_SAC -DRL_TOOLS_RL_ZOO_ENVIRONMENT_L2F
+    g++ -Iinclude -std=c++17 -Ofast -march=native src/rl/zoo/l2f/sac.cpp -framework Accelerate -DRL_TOOLS_BACKEND_ENABLE_ACCELERATE
     ./a.out
 
 - ``-framework Accelerate``: Link against the Accelerate framework
