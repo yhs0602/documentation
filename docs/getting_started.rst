@@ -17,7 +17,7 @@ There are three main ways to use |RLT|:
 :ref:`Native: No CMake <native-no-cmake>`               - Full performance
                                                         - Great for purists who hate CMake and build-systems in general                - No automatic interoperability with IDEs for e.g. debugging
                                                         - Shows that |RLT| is actually dependency-free
-:ref:`Native: As a Submodule/Library <native-library>`  - Full performance                                                             - No preconfigured targets like in the |RLT| Zoo
+:ref:`Native: As a Submodule/Library <native-library>`  - Full performance                                                             - Slightly more initial setup
                                                         - Easy versioning by including |RLT| as a submodule
                                                         - Great for implementing your own environments and maintaining them over time
 ====================================================== =============================================================================== =====================
@@ -234,7 +234,7 @@ The following compiles the |RLT| Zoo example for SAC with the Learning to Fly en
 
 .. code-block:: bash
 
-    g++ -Iinclude -std=c++17 src/rl/zoo/l2f/sac.cpp
+    g++ -I include -std=c++17 src/rl/zoo/l2f/sac.cpp
     ./a.out
 
 - ``-Iinclude``: This is run from the root of the cloned repository folder ``rl-tools`` hence the header search path is ``include``. In Docker this should be adjusted to ``-I/rl_tools/include``.
@@ -248,7 +248,7 @@ This will be quite slow because no optimizations are applied by default. In the 
 
 .. code-block:: bash
 
-    g++ -Iinclude -std=c++17 -Ofast -march=native src/rl/zoo/l2f/sac.cpp
+    g++ -I include -std=c++17 -Ofast -march=native src/rl/zoo/l2f/sac.cpp
     ./a.out
 
 
@@ -264,7 +264,7 @@ Docker & Ubuntu & WSL
 
 .. code-block:: bash
 
-    g++ -Iinclude -std=c++17 -Ofast -march=native src/rl/zoo/l2f/sac.cpp -lblas -DRL_TOOLS_BACKEND_ENABLE_OPENBLAS
+    g++ -I include -std=c++17 -Ofast -march=native src/rl/zoo/l2f/sac.cpp -lblas -DRL_TOOLS_BACKEND_ENABLE_OPENBLAS
     ./a.out
 
 - ``-lblas``: Link against the BLAS library
@@ -276,7 +276,7 @@ macOS
 
 .. code-block:: bash
 
-    g++ -Iinclude -std=c++17 -Ofast -march=native src/rl/zoo/l2f/sac.cpp -framework Accelerate -DRL_TOOLS_BACKEND_ENABLE_ACCELERATE
+    g++ -I include -std=c++17 -Ofast -march=native src/rl/zoo/l2f/sac.cpp -framework Accelerate -DRL_TOOLS_BACKEND_ENABLE_ACCELERATE
     ./a.out
 
 - ``-framework Accelerate``: Link against the Accelerate framework
